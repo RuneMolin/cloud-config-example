@@ -28,4 +28,9 @@ jobs:
       - name: Build with maven
         run: ./mvnw -B package --file pom.xml
 
+      - name: Publish server image
+        run: ./mvnw -B jib:build -pl server
+
+      - name: Publish client image
+        run: ./mvnw -B jib:build -pl client
 
