@@ -5,9 +5,9 @@ services:
     image: rmolin/cloud-config-server
     environment:
       - server.port=8888
-      - spring.cloud.config.server.git.uri=https://gitlab.cpr.dk/rmolin2/config-server-example.git
+      - spring.cloud.config.server.git.uri=https://github.com/RuneMolin/cloud-config-repo.git
       - spring.cloud.config.server.git.clone-on-start=true
-      - spring.cloud.config.server.git.default-label=master
+      - spring.cloud.config.server.git.default-label=main
 
   cloud-config-client:
     image: rmolin/cloud-config-client
