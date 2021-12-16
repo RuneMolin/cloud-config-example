@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Rune Molin, rmo@nine.dk
  **/
 @RestController
-@RefreshScope
+//@RefreshScope
 public class Controller {
   @Value("${message}")
   private String message;
