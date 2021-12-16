@@ -4,14 +4,13 @@ services:
   cloud-config-server:
     image: rmolin/cloud-config-server
     environment:
-      - name=value
       - server.port=8888
       - spring.cloud.config.server.git.uri=https://gitlab.cpr.dk/rmolin2/config-server-example.git
       - spring.cloud.config.server.git.clone-on-start=true
       - spring.cloud.config.server.git.default-label=master
 
   cloud-config-client:
-    image: cloud-config-client
+    image: rmolin/cloud-config-client
     ports:
       - "8080:8080"
     environment:
