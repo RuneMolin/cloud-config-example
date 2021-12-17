@@ -6,6 +6,8 @@ services:
 
   cloud-config-server:
     image: rmolin/cloud-config-server
+    ports:
+      - "8888:8888"
     environment:
       - server.port=8888
       - spring.cloud.config.server.git.uri=https://github.com/RuneMolin/cloud-config-repo.git
@@ -36,7 +38,3 @@ services:
     restart: on-failure
     depends_on:
       - cloud-config-server
-
-
-
-
