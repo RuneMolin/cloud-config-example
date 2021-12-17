@@ -1,6 +1,9 @@
 version: '3'
 
 services:
+  rabbitmq:
+    image: rabbitmq:3
+
   cloud-config-server:
     image: rmolin/cloud-config-server
     environment:
@@ -8,6 +11,13 @@ services:
       - spring.cloud.config.server.git.uri=https://github.com/RuneMolin/cloud-config-repo.git
       - spring.cloud.config.server.git.clone-on-start=true
       - spring.cloud.config.server.git.default-label=main
+      - spring.rabbitmq.host=rabbitmq
+      - spring.rabbitmq.port=5672
+      - spring.rabbitmq.username=guest
+      - spring.rabbitmq.password=guest
+    restart: on-failure
+    depends_on:
+      - rabbitmq
 
   cloud-config-client:
     image: rmolin/cloud-config-client
@@ -17,6 +27,12 @@ services:
       - spring.application.name=config-client
       - spring.profiles.active=development
       - spring.config.import=configserver:http://cloud-config-server:8888
+      - spring.rabbitmq.host=rabbitmq
+      - spring.rabbitmq.port=5672
+      - spring.rabbitmq.username=guest
+      - spring.rabbitmq.password=guest
+      - spring.cloud.bus.enabled=true
+      - spring.cloud.bus.refresh.enabled=true
     restart: on-failure
     depends_on:
       - cloud-config-server
